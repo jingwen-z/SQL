@@ -119,3 +119,27 @@ WHERE ENTITE = "BOA Niger";
 -- Transformation of the column “Date dernière MAJ lab par GAR”’s format
 UPDATE Banques
 SET [Date dernière MAJ lab par GAR ] = Format([Date dernière MAJ lab par GAR ], "dd/mm/yyyy");
+
+-- Movement of comment
+UPDATE Banques
+SET [Commentaires] = Mid([Actualisation Dossier LAB en cas de mise en jeu],InStr([Actualisation Dossier LAB en cas de mise en jeu],": ")+2)
+WHERE [ENTITE]="ALIOS FINANCE GABON / SOGACA";
+ 
+ -- Keep the date in "Actualisation Dossier LAB en cas de mise en jeu"
+SELECT Left([Actualisation Dossier LAB en cas de mise en jeu],InStr([Actualisation Dossier LAB en cas de mise en jeu],": ")-1)
+FROM Banques
+WHERE [ENTITE]="ALIOS FINANCE GABON / SOGACA";
+ 
+-- Transformation of the column “Date transmission DPC”’s format 
+UPDATE Banques
+SET [Actualisation Dossier LAB en cas de mise en jeu] = Format([Actualisation Dossier LAB en cas de mise en jeu ], "dd/mm/yyyy");
+ 
+ -- Standardization of spelling in the field "Type Eligibilité"
+UPDATE Banques
+SET [Type Eligibilité] = "Non Eligible"
+WHERE [Type Eligibilité] = "Non éligible";
+ 
+-- Correction of spelling in the field "Risque Pays"
+UPDATE Banques
+SET [Risque Pays] = "très élevé"
+WHERE [Risque Pays] = "très élévé";
