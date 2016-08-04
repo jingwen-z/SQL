@@ -1,7 +1,5 @@
 -- Remove columns 
-
 ALTER TABLE Banques
-
 DROP COLUMN Champ20, Champ21, Champ22, Champ23, Champ24, Champ25, Champ26, Champ27, Champ28, Champ29, Champ30, Champ31, Champ32, Champ33;
 
 -- Remove empty rows
