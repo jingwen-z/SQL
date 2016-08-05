@@ -13,5 +13,6 @@ FROM GPP
 ORDER BY Pays;
 
 -- update the column "Moyenne des prêts en EUR "
-UPDATE GPP SET [Moyenne des prêts en EUR] = 0
+UPDATE GPP 
+SET [Moyenne des prêts en EUR] = 0
 WHERE [Min des prêts en EUR] = 0 And [Max des prêts en EUR] = 0;
