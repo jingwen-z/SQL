@@ -20,3 +20,18 @@ WHERE [Solde-Délai respecté] = "N/A";
 UPDATE MEJ
 SET [Solde-Date de paiement (accord GAR à DBO)] = " "
 WHERE [Solde-Date de paiement (accord GAR à DBO)] = "N/A";
+
+-- Update a date in "Impayés-Date du 1er impayé non régularisé "
+UPDATE MEJ
+SET  [Impayés-Date du 1er impayé non régularisé] = "01/05/2012"
+WHERE [Impayés-Date du 1er impayé non régularisé] = "mai-12";
+
+-- Update "Impayés-Délai respecté "_1
+UPDATE MEJ
+SET [Impayés-Délai respecté] = IIf(DateDiff("d", [Impayés-Date du 1er impayé non régularisé], [Impayés-Date de l'information des impayés par la banque à l'AFD]) BETWEEN 0 AND 60, "OK", "NOK");
+
+-- Update "Impayés-Délai respecté"_2
+UPDATE MEJ
+SET [Impayés-Délai respecté] = ""
+WHERE [Impayés-Date du 1er impayé non régularisé] IS NULL
+       OR [Impayés-Date de l'information des impayés par la banque à l'AFD] IS NULL;
