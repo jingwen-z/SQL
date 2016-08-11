@@ -1,6 +1,6 @@
 -- Remove the columns
 ALTER TABLE MEJ
-DROP COLUMN [Impayés-Date du 1er impayé survenu], [Nombre d'années écoulé entre date de signature et demande d'avan], [Nombre de jours entre date de demande paiement GAR et date paiem], [DBO-Date de saisie comptable], [DBO-Montant de l'avance comptabilisée en €], [DBO-Ecart GAR - DBO], [DBO-Commentaires], [DBO-N° MEJ DBO Compta], [DBO-Contrôle 1er niveau];
+DROP COLUMN [Impayés-Date du 1er impayé survenu], [DBO-Date de saisie comptable], [DBO-Montant de l'avance comptabilisée en €], [DBO-Ecart GAR - DBO], [DBO-Commentaires], [DBO-N° MEJ DBO Compta], [DBO-Contrôle 1er niveau];
 
 -- Remove the empty lines
 DELETE *
