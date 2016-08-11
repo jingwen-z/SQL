@@ -35,3 +35,27 @@ UPDATE MEJ
 SET [Impayés-Délai respecté] = ""
 WHERE [Impayés-Date du 1er impayé non régularisé] IS NULL
        OR [Impayés-Date de l'information des impayés par la banque à l'AFD] IS NULL;
+
+-- Update "Solde-Rappel date limite de paiement du solde"
+UPDATE MEJ
+SET [Solde-Rappel date limite de paiement du solde] = IIf( [Avance-Date de paiement DBO (swift)]<>"déchéance", DateAdd("w",1096,[Avance-Date de paiement DBO (swift)]), "" );
+
+-- Transformation of the format of “Solde-Date de demande du solde” and "Solde-Rappel date limite de paiement du solde"
+UPDATE MEJ
+SET [Solde-Date de demande du solde] = Format( [Solde-Date de demande du solde], "dd/mm/yyyy" ), 
+        [Solde-Rappel date limite de paiement du solde] = Format( [Solde-Rappel date limite de paiement du solde], "dd/mm/yyyy" );
+
+-- Update "Solde-Délai respecté"_1
+UPDATE MEJ
+SET [Solde-Délai respecté] = IIf([Solde-Date de demande du solde] < [Solde-Rappel date limite de paiement du solde],"OK","NOK");
+
+-- Update "Solde-Délai respecté"_2
+UPDATE MEJ
+SET [Solde-Délai respecté ] = ""
+WHERE [Solde-Date de demande du solde] IS NULL
+       OR [Solde-Rappel date limite de paiement du solde] IS NULL;
+
+-- Correct 'MEJ $'_ImportErrors-Date de demande d'avance 
+UPDATE MEJ
+SET [MEJ-Date de demande d'avance] = ""
+WHERE [MEJ-Date de demande d'avance] = "-";
