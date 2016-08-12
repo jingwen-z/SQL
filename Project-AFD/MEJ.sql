@@ -59,3 +59,35 @@ WHERE [Solde-Date de demande du solde] IS NULL
 UPDATE MEJ
 SET [MEJ-Date de demande d'avance] = ""
 WHERE [MEJ-Date de demande d'avance] = "-";
+
+-- Update the column "Nombre d'années entre date de signature et demande d'avance"_1
+UPDATE MEJ
+SET [Nombre d'années entre date de signature et demande d'avance] = DateDiff("yyyy",[Date de signature],[MEJ-Date de demande d'avance]);
+
+-- Update the column "Nombre d'années entre date de signature et demande d'avance"_2
+UPDATE MEJ
+SET [Nombre d'années entre date de signature et demande d'avance] = ""
+WHERE [Date de signature] IS NULL
+        OR [MEJ-Date de demande d'avance] IS NULL ;
+
+-- Update the column "Nombre de mois écoulé entre dossier complet et fin instruction"
+UPDATE MEJ
+SET [Nombre de mois écoulé entre dossier complet et fin instruction] = DateDiff("m", [MEJ-Date à laquelle le dossier est complet], [MEJ-Date fin instruction]);
+
+-- Update the column "Nombre de jours écoulé entre fin d'instruction et visa JUR"
+UPDATE MEJ
+SET [Nombre de jours écoulé entre fin d'instruction et visa JUR] = DateDiff("d",[MEJ-Date fin instruction],[MEJ-Date visa JUR]);
+
+-- Update the column "Nombre de jours écoulé entre visa JUR et décision GAR"
+UPDATE MEJ
+SET [Nombre de jours écoulé entre visa JUR et décision GAR] = DateDiff("d", [MEJ-Date visa JUR], [MEJ-Date décision GAR]);
+
+-- Update the column "MEJ-Délai respecté"_1
+UPDATE MEJ
+SET [MEJ-Délai respecté] = IIf( DateDiff("d",[EG-Date décheance du terme],[MEJ-Date de demande d'avance]) < 360, "OK", "NOK"  );
+
+-- Update the column "MEJ-Délai respecté"_2
+UPDATE MEJ
+SET [MEJ-Délai respecté] = ""
+WHERE [EG-Date décheance du terme] IS NULL
+        OR [MEJ-Date de demande d'avance] IS NULL;
