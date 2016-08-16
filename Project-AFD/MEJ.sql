@@ -99,3 +99,23 @@ UPDATE MEJ
 SET [MEJ-Délai respecté] = ""
 WHERE [EG-Date décheance du terme] IS NULL
         OR [MEJ-Date de demande d'avance] IS NULL;
+
+-- Update the column "Nombre de jours entre demande paiement GAR et paiement DBO"
+UPDATE MEJ
+SET [Nombre de jours entre demande paiement GAR et paiement DBO] = DateDiff("d",[Avance-Date de paiement (accord GAR à DBO)],[Avance-Date de paiement DBO (swift)]);
+
+-- Standardization of "Avance-Date de paiement (accord GAR à DBO)"'s format
+UPDATE MEJ
+SET [Avance-Date de paiement (accord GAR à DBO)] = Format([Avance-Date de paiement (accord GAR à DBO)], "dd/mm/yyyy");
+
+-- Standardization of "Avance-Date de paiement DBO (swift)"'s format
+UPDATE MEJ
+SET [Avance-Date de paiement DBO (swift)] = Format([Avance-Date de paiement DBO (swift)], "dd/mm/yyyy");
+
+-- Standardization of "Solde-Date de paiement (accord GAR à DBO)"'s format
+UPDATE MEJ
+SET [Solde-Date de paiement (accord GAR à DBO)] = Format([Solde-Date de paiement (accord GAR à DBO)], "dd/mm/yyyy");
+
+-- Standardization of "Solde-Date de paiement DBO (swift)"'s format
+UPDATE MEJ
+SET [Solde-Date de paiement DBO (swift)] = Format([Solde-Date de paiement DBO (swift)], "dd/mm/yyyy");
