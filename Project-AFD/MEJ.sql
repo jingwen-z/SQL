@@ -59,6 +59,10 @@ SET [Solde-Délai respecté ] = ""
 WHERE [Solde-Date de demande du solde] IS NULL
        OR [Solde-Rappel date limite de paiement du solde] IS NULL;
 
+-- Standardization of "Date de signature"'s format
+UPDATE MEJ
+SET [Date de signature] = Format([Date de signature], "dd/mm/yyyy");
+
 -- Correct 'MEJ $'_ImportErrors-Date de demande d'avance 
 UPDATE MEJ
 SET [MEJ-Date de demande d'avance] = ""
