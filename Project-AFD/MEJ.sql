@@ -26,6 +26,10 @@ UPDATE MEJ
 SET  [Impayés-Date du 1er impayé non régularisé] = "01/05/2012"
 WHERE [Impayés-Date du 1er impayé non régularisé] = "mai-12";
 
+-- Standardization of "Impayés-Date du 1er impayé non régularisé"'s format
+UPDATE MEJ
+SET [Impayés-Date du 1er impayé non régularisé] = Format([Impayés-Date du 1er impayé non régularisé], "dd/mm/yyyy");
+
 -- Update "Impayés-Délai respecté "_1
 UPDATE MEJ
 SET [Impayés-Délai respecté] = IIf(DateDiff("d", [Impayés-Date du 1er impayé non régularisé], [Impayés-Date de l'information des impayés par la banque à l'AFD]) BETWEEN 0 AND 60, "OK", "NOK");
