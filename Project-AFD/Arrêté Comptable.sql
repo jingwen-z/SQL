@@ -5,7 +5,7 @@ WHERE [N° concours] IS NULL;
 
 -- Remove columns
 ALTER TABLE [Arrêté Comptable]
-DROP COLUMN Clé, [Commentaires DBO au 31/12/2015]
+DROP COLUMN Clé, [Commentaires DBO au 31/12/2015];
 
 -- Update the column "CNE"
 UPDATE [Arrêté Comptable] 
