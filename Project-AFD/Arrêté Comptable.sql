@@ -8,7 +8,8 @@ ALTER TABLE [Arrêté Comptable]
 DROP COLUMN Clé, [Commentaires DBO au 31/12/2015]
 
 -- Update the column "CNE"
-UPDATE [Arrêté Comptable] SET CNE = ""
+UPDATE [Arrêté Comptable] 
+SET CNE = ""
 WHERE [CNE GAR] IS NULL
        OR [CNE DBO] IS NULL;
 
