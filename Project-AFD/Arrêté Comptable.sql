@@ -16,6 +16,10 @@ WHERE [N° concours] = "CCM116901"
        OR [N° concours] = "CMG118901"
        OR [N° concours] = "CMG119201";
 
+-- Determine the primary key
+ALTER TABLE  [Arrêté Comptable]
+ADD PRIMARY KEY ([N° concours]);
+
 -- Update the column "CNE"
 UPDATE [Arrêté Comptable] 
 SET CNE = ""
