@@ -22,7 +22,30 @@ DELETE *
 FROM [Table Principale]
 WHERE [N° concours] IS NULL;
 
+-- Update repeated "N° concours"
+UPDATE [Table Principale]
+SET [N° concours] = [N° concours] & "-" & Right([Année d'octroi],2)
+WHERE [N° concours] = "CCM116901"
+   OR [N° concours] = "CCM117601"
+   OR [N° concours] = "CCM132901"
+   OR [N° concours] = "CGA110701"
+   OR [N° concours] = "CGH108001"
+   OR [N° concours] = "CMG118901"
+   OR [N° concours] = "CMG119201";
+   
+-- Determine the primary key
+ALTER TABLE  [Table Principale]
+ADD PRIMARY KEY ([N° concours]);
+
 -- Update the colomn "dont femmes"
 UPDATE [Table Principale]
 SET [dont femmes] = " "
 WHERE [dont femmes] = "non";
+
+-- Remove the faux values in "Durée du prêt-En mois"
+UPDATE [Table Principale]
+SET [Durée du prêt-En mois] = ""
+WHERE [Durée du prêt-En mois] = "15/06/2017"
+   OR [Durée du prêt-En mois] = "30/09/2010"
+   OR [Durée du prêt-En mois] = "30/04/2010"
+   OR [Durée du prêt-En mois] = "28/02/2010";
