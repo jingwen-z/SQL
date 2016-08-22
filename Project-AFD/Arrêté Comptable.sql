@@ -3,7 +3,7 @@ DELETE *
 FROM [Arrêté Comptable]
 WHERE [N° concours] IS NULL;
 
--- Remove columns
+-- Remove column
 ALTER TABLE [Arrêté Comptable]
 DROP COLUMN [Commentaires DBO au 31/12/2015];
 
