@@ -40,6 +40,6 @@ WHERE [RAV sur non signé GAR] IS NULL
 
 -- Update the column "Risque"
 UPDATE [Arrêté Comptable]
-SELECT [Ecart-Risque] = ""
+SET [Ecart-Risque] = ""
 WHERE [Risque GAR] IS NULL
        OR [Risque DBO] IS NULL;
