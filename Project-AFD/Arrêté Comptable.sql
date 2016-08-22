@@ -7,6 +7,15 @@ WHERE [N° concours] IS NULL;
 ALTER TABLE [Arrêté Comptable]
 DROP COLUMN [Commentaires DBO au 31/12/2015];
 
+-- Update repeated "N° concours"
+UPDATE [Arrêté Comptable] SET [N° concours] = [N° concours] & "-" & Right([Année d'octroi],2)
+WHERE [N° concours] = "CCM116901"
+       OR [N° concours] = "CCM117601"
+       OR [N° concours] = "CGA110701"
+       OR [N° concours] = "CGH108001"
+       OR [N° concours] = "CMG118901"
+       OR [N° concours] = "CMG119201";
+
 -- Update the column "CNE"
 UPDATE [Arrêté Comptable] 
 SET CNE = ""
