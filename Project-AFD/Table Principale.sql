@@ -49,3 +49,8 @@ WHERE [Durée du prêt-En mois] = "15/06/2017"
    OR [Durée du prêt-En mois] = "30/09/2010"
    OR [Durée du prêt-En mois] = "30/04/2010"
    OR [Durée du prêt-En mois] = "28/02/2010";
+
+-- Correct a value in "TA transmis à DBO"
+UPDATE [Table Principale]
+SET [TA transmis à DBO] = "16/09/2013"
+WHERE [TA transmis à DBO] = "30/04/2013-16/09/2013";
