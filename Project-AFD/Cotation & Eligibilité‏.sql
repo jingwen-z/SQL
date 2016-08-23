@@ -20,7 +20,8 @@ ADD COLUMN [GO/Remarque] Text;
 -- the field “Date transmission DPC au GO”
 -- Separation of the column “Date transmission DPC au GO”
 UPDATE Banques
-SET [GO/Remarque] = Left([Date transmission DPC au GO],(Instr([Date transmission DPC au GO]," ")-1)), [Date transmission DPC au GO] = Mid([Date transmission DPC au GO],(InStr([Date transmission DPC au GO]," ")+1));
+SET [GO/Remarque] = Left([Date transmission DPC au GO],(Instr([Date transmission DPC au GO]," ")-1)), 
+    [Date transmission DPC au GO] = Mid([Date transmission DPC au GO],(InStr([Date transmission DPC au GO]," ")+1));
 
 -- Concatenation of “Date transmission DPC” and “GO/Rq”
 UPDATE Banques
