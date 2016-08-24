@@ -22,6 +22,16 @@ UPDATE MEJ
 SET [Solde-Date de paiement DBO (swift)] = " "
 WHERE [Solde-Date de paiement DBO (swift)] = "N/A";
 
+-- Update a date in the field "Impayés-Date du 1er impayé survenu"_10
+UPDATE MEJ 
+SET [Impayés-Date du 1er impayé survenu] = "01/05/2010"
+WHERE [Impayés-Date du 1er impayé survenu] = "mai-10";
+
+-- Update a date in the field "Impayés-Date du 1er impayé survenu"_11
+UPDATE MEJ 
+SET [Impayés-Date du 1er impayé survenu] = "01/02/2011"
+WHERE [Impayés-Date du 1er impayé survenu] = "févr.-11";
+
 -- Update a date in "Impayés-Date du 1er impayé non régularisé "
 UPDATE MEJ
 SET  [Impayés-Date du 1er impayé non régularisé] = "01/05/2012"
@@ -30,6 +40,10 @@ WHERE [Impayés-Date du 1er impayé non régularisé] = "mai-12";
 -- Standardization of "Impayés-Date du 1er impayé non régularisé"'s format
 UPDATE MEJ
 SET [Impayés-Date du 1er impayé non régularisé] = Format([Impayés-Date du 1er impayé non régularisé], "dd/mm/yyyy");
+
+-- Correct "Impayés-Date du 1er impayé non régularisé"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [Impayés-Date du 1er impayé non régularisé] Date;
 
 -- Update "Impayés-Délai respecté"_1
 UPDATE MEJ
