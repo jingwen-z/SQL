@@ -1,7 +1,3 @@
--- Remove the columns
-ALTER TABLE MEJ
-DROP COLUMN [Impayés-Date du 1er impayé survenu], [DBO-Date de saisie comptable], [DBO-Montant de l'avance comptabilisée en €], [DBO-Ecart GAR - DBO], [DBO-Commentaires], [DBO-N° MEJ DBO Compta], [DBO-Contrôle 1er niveau];
-
 -- Remove the empty lines
 DELETE *
 FROM MEJ
@@ -20,6 +16,11 @@ WHERE [Solde-Délai respecté] = "N/A";
 UPDATE MEJ
 SET [Solde-Date de paiement (accord GAR à DBO)] = " "
 WHERE [Solde-Date de paiement (accord GAR à DBO)] = "N/A";
+
+-- Update the column "Solde-Date de paiement DBO (swift)"
+UPDATE MEJ 
+SET [Solde-Date de paiement DBO (swift)] = " "
+WHERE [Solde-Date de paiement DBO (swift)] = "N/A";
 
 -- Update a date in "Impayés-Date du 1er impayé non régularisé "
 UPDATE MEJ
@@ -119,3 +120,15 @@ SET [Solde-Date de paiement (accord GAR à DBO)] = Format([Solde-Date de paiemen
 -- Standardization of "Solde-Date de paiement DBO (swift)"'s format
 UPDATE MEJ
 SET [Solde-Date de paiement DBO (swift)] = Format([Solde-Date de paiement DBO (swift)], "dd/mm/yyyy");
+
+-- Update the column "DBO-Ecart GAR – DBO"
+UPDATE MEJ
+SET [DBO-Ecart GAR - DBO] = [Avance-Montant de l'avance en €] - [DBO-Montant de l'avance comptabilisée en €];
+
+-- Creation of a new column “DBO-Contrôle 1er niveau-Contrôleur”
+ALTER TABLE MEJ
+ADD COLUMN [DBO-Contrôle 1er niveau-Contrôleur] Text;
+
+-- Creation of a new column “DBO-Contrôle 1er niveau-Date”
+ALTER TABLE MEJ
+ADD COLUMN [DBO-Contrôle 1er niveau-Date] Date;
