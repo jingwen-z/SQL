@@ -31,15 +31,15 @@ WHERE [Impayés-Date du 1er impayé non régularisé] = "mai-12";
 UPDATE MEJ
 SET [Impayés-Date du 1er impayé non régularisé] = Format([Impayés-Date du 1er impayé non régularisé], "dd/mm/yyyy");
 
--- Update "Impayés-Délai respecté "_1
+-- Update "Impayés-Délai respecté"_1
 UPDATE MEJ
-SET [Impayés-Délai respecté] = IIf(DateDiff("d", [Impayés-Date du 1er impayé non régularisé], [Impayés-Date de l'information des impayés par la banque à l'AFD]) BETWEEN 0 AND 60, "OK", "NOK");
+SET [Impayés-Délai respecté] = IIf(DateDiff("d", [Impayés-Date du 1er impayé survenu], [Impayés-Date de l'information des impayés par la banque à l'AFD]) BETWEEN 0 AND 60, "OK", "NOK");
 
 -- Update "Impayés-Délai respecté"_2
 UPDATE MEJ
 SET [Impayés-Délai respecté] = ""
-WHERE [Impayés-Date du 1er impayé non régularisé] IS NULL
-       OR [Impayés-Date de l'information des impayés par la banque à l'AFD] IS NULL;
+WHERE [Impayés-Date du 1er impayé survenu] IS NULL 
+   OR [Impayés-Date de l'information des impayés par la banque à l'AFD] IS NULL;
 
 -- Update "Solde-Rappel date limite de paiement du solde"
 UPDATE MEJ
