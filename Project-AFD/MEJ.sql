@@ -136,3 +136,28 @@ ADD COLUMN [DBO-Contrôle 1er niveau-Contrôleur] Text;
 -- Creation of a new column “DBO-Contrôle 1er niveau-Date”
 ALTER TABLE MEJ
 ADD COLUMN [DBO-Contrôle 1er niveau-Date] Date;
+
+-- Change the fields' order « DBO-Contrôle 1er niveau-Contrôleur » and « DBO-Contrôle 1er niveau-Date » by hand (Mode Création) 
+
+-- Update a value of "DBO-Contrôle 1er niveau"
+UPDATE MEJ
+SET [DBO-Contrôle 1er niveau] = "OK - AP - 03/06/2016"
+WHERE [DBO-Contrôle 1er niveau] = "OK - AP - 030616";
+
+-- Fill the field "DBO-Contrôle 1er niveau-Contrôleur"
+UPDATE MEJ
+SET [DBO-Contrôle 1er niveau-Contrôleur] = Mid([DBO-Contrôle 1er niveau],(InStr([DBO-Contrôle 1er niveau],"A")), 2);
+
+-- Fill the field "DBO-Contrôle 1er niveau-Date"
+UPDATE MEJ
+SET [DBO-Contrôle 1er niveau-Date] = IIf( Mid([DBO-Contrôle 1er niveau],(InStr([DBO-Contrôle 1er niveau],"P") + 3), 1) = " ", Mid([DBO-Contrôle 1er niveau],(InStr([DBO-Contrôle 1er niveau],"P") + 4)), Mid([DBO-Contrôle 1er niveau],(InStr([DBO-Contrôle 1er niveau],"P") + 2)) );
+
+-- Standardization of "DBO-Contrôle 1er niveau-Date"'s format
+UPDATE MEJ
+SET [DBO-Contrôle 1er niveau-Date] = Format([DBO-Contrôle 1er niveau-Date], "dd/mm/yyyy");
+
+-- Rename the field "DBO-Contrôle 1er niveau" by hand (Mode Création) : "DBO-Contrôle 1er niveau-Statu"
+
+-- Update the field "DBO-Contrôle 1er niveau-Statu"
+UPDATE MEJ
+SET [DBO-Contrôle 1er niveau-statu] = Left([DBO-Contrôle 1er niveau-statu], 2);
