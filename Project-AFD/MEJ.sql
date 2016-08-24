@@ -69,6 +69,10 @@ UPDATE MEJ
 SET [MEJ-Date de demande d'avance] = ""
 WHERE [MEJ-Date de demande d'avance] = "-";
 
+-- Correct "MEJ-Date de demande d'avance"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [MEJ-Date de demande d'avance] Date;
+
 -- Update the column "Nombre d'années entre date de signature et demande d'avance"_1
 UPDATE MEJ
 SET [Nombre d'années entre date de signature et demande d'avance] = DateDiff("yyyy",[Date de signature],[MEJ-Date de demande d'avance]);
