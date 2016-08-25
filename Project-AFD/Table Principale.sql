@@ -54,3 +54,84 @@ WHERE [Durée du prêt-En mois] = "15/06/2017"
 UPDATE [Table Principale]
 SET [TA transmis à DBO] = "16/09/2013"
 WHERE [TA transmis à DBO] = "30/04/2013-16/09/2013";
+
+-- Standardization of spelling in the column "Durée du prêt-En mois"
+UPDATE [Table Principale]
+SET [Durée du prêt-En mois] = "jusqu'au 30/06/2010"
+WHERE [N° concours] = "CMG131601";
+
+-- Transformation information from "En mois" to "Observation"
+UPDATE [Table Principale]
+SET [Observations ou modalités commission GPP après signature] = [Observations ou modalités commission GPP après signature] & "   Durée du prêt-En mois: " & [Durée du prêt-En mois] 
+WHERE [Durée du prêt-En mois] = "jusqu'au 30/06/2012"
+   OR [Durée du prêt-En mois] = "6 mois renouvelable"
+   OR [Durée du prêt-En mois] = "jusqu'au 30/06/2011"
+   OR [Durée du prêt-En mois] = "31/03/2011"
+   OR [Durée du prêt-En mois] = "30/06/2012"
+   OR [Durée du prêt-En mois] = "Validité 30/06/2010 renouvelable 6 mois"
+   OR [Durée du prêt-En mois] = "validité 31/08/2010 attent date débloc ?"
+   OR [Durée du prêt-En mois] = "jusqu'au 30/11/2010"
+   OR [Durée du prêt-En mois] = "validité 31/03/2010"
+   OR [Durée du prêt-En mois] = "validité 31/01/2010"
+   OR [Durée du prêt-En mois] = "jusqu'au 30/06/2010"
+   OR [Durée du prêt-En mois] = "30/06/2009"
+   OR [Durée du prêt-En mois] = "30/04/2009"
+   OR [Durée du prêt-En mois] = "31/03/2009"
+   OR [Durée du prêt-En mois] = "31/08/2012 dt 4 mois"
+   OR [Durée du prêt-En mois] = "(prêt) 8 ans dont 1 et (leasing) 5 ans"
+   OR [Durée du prêt-En mois] = "jusqu'au 31/07/2011"
+   OR [Durée du prêt-En mois] = "Min 93 et Max 99 mois";
+
+-- Remove irregular data in "En mois"
+UPDATE [Table Principale]
+SET [Durée du prêt-En mois] = ""
+WHERE [Durée du prêt-En mois] = "jusqu'au 30/06/2012"
+   OR [Durée du prêt-En mois] = "6 mois renouvelable"
+   OR [Durée du prêt-En mois] = "jusqu'au 30/06/2011"
+   OR [Durée du prêt-En mois] = "31/03/2011"
+   OR [Durée du prêt-En mois] = "30/06/2012"
+   OR [Durée du prêt-En mois] = "Validité 30/06/2010 renouvelable 6 mois"
+   OR [Durée du prêt-En mois] = "validité 31/08/2010 attent date débloc ?"
+   OR [Durée du prêt-En mois] = "jusqu'au 30/11/2010"
+   OR [Durée du prêt-En mois] = "validité 31/03/2010"
+   OR [Durée du prêt-En mois] = "validité 31/01/2010"
+   OR [Durée du prêt-En mois] = "jusqu'au 30/06/2010"
+   OR [Durée du prêt-En mois] = "30/06/2009"
+   OR [Durée du prêt-En mois] = "30/04/2009"
+   OR [Durée du prêt-En mois] = "31/03/2009"
+   OR [Durée du prêt-En mois] = "31/08/2012 dt 4 mois"
+   OR [Durée du prêt-En mois] = "(prêt) 8 ans dont 1 et (leasing) 5 ans"
+   OR [Durée du prêt-En mois] = "jusqu'au 31/07/2011"
+   OR [Durée du prêt-En mois] = "Min 93 et Max 99 mois";
+
+-- Transformation information from "Dont différé en mois" to "Observation"
+UPDATE [Table Principale]
+SET [Observations ou modalités commission GPP après signature] = [Observations ou modalités commission GPP après signature] & "   Durée du prêt-Dont différé en mois: " & [Durée du prêt-Dont différé en mois] 
+WHERE [Durée du prêt-Dont différé en mois] = "entre 9 et 15 mois";
+
+-- Remove irregular data in "Dont différé en mois"
+UPDATE [Table Principale]
+SET [Durée du prêt-Dont différé en mois] = ""
+WHERE [Durée du prêt-Dont différé en mois] = "entre 9 et 15 mois";
+
+-- Transformation information from "Date 1ère échéance" to "Observation"
+UPDATE [Table Principale]
+SET [Observations ou modalités commission GPP après signature] = [Observations ou modalités commission GPP après signature] & "   Échéances en capital-Date 1ère échéance: " & [Échéances en capital-Date 1ère échéance] 
+WHERE [Échéances en capital-Date 1ère échéance] = "OC"
+   OR [Échéances en capital-Date 1ère échéance] = "en attente TA modificatif"
+   OR [Échéances en capital-Date 1ère échéance] = "ok"
+   OR [Échéances en capital-Date 1ère échéance] = "reçu 10122009"
+   OR [Échéances en capital-Date 1ère échéance] = "att nv TA"
+   OR [Échéances en capital-Date 1ère échéance] = "pas TA reçu"
+   OR [Échéances en capital-Date 1ère échéance] = "mail 11/02/10";
+
+-- Remove irregular data in "Date 1ère échéance"
+UPDATE [Table Principale]
+SET [Échéances en capital-Date 1ère échéance] = ""
+WHERE [Échéances en capital-Date 1ère échéance] = "OC"
+   OR [Échéances en capital-Date 1ère échéance] = "en attente TA modificatif"
+   OR [Échéances en capital-Date 1ère échéance] = "ok"
+   OR [Échéances en capital-Date 1ère échéance] = "reçu 10122009"
+   OR [Échéances en capital-Date 1ère échéance] = "att nv TA"
+   OR [Échéances en capital-Date 1ère échéance] = "pas TA reçu"
+   OR [Échéances en capital-Date 1ère échéance] = "mail 11/02/10";
