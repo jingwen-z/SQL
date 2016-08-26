@@ -175,3 +175,11 @@ SET [DBO-Contrôle 1er niveau-Date] = Format([DBO-Contrôle 1er niveau-Date], "d
 -- Update the field "DBO-Contrôle 1er niveau-Statu"
 UPDATE MEJ
 SET [DBO-Contrôle 1er niveau-statu] = Left([DBO-Contrôle 1er niveau-statu], 2);
+
+-- Create a column "Index"
+ALTER TABLE MEJ
+ADD [Index] AUTOINCREMENT;
+
+-- Determine a primary key
+ALTER TABLE MEJ
+ADD PRIMARY KEY ([Index]);
