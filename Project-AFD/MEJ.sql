@@ -111,7 +111,7 @@ SET [Nombre de jours écoulé entre visa JUR et décision GAR] = DateDiff("d", [
 
 -- Update the column "MEJ-Délai respecté"_1
 UPDATE MEJ
-SET [MEJ-Délai respecté] = IIf( DateDiff("d",[EG-Date décheance du terme],[MEJ-Date de demande d'avance]) < 360, "OK", "NOK"  );
+SET [MEJ-Délai respecté] =  IIf( DateDiff("yyyy",[EG-Date décheance du terme],[MEJ-Date de demande d'avance]) BETWEEN 0 AND 1, "OK", "NOK" );
 
 -- Update the column "MEJ-Délai respecté"_2
 UPDATE MEJ
