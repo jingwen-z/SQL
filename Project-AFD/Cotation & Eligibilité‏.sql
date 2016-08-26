@@ -142,3 +142,11 @@ WHERE [Type Eligibilité] = "Non éligible";
 UPDATE Banques
 SET [Risque Pays] = "très élevé"
 WHERE [Risque Pays] = "très élévé";
+
+-- Create a column "Index"
+ALTER TABLE Banques
+ADD [Index] AUTOINCREMENT;
+
+-- Determine a primary key
+ALTER TABLE [Banques]
+ADD PRIMARY KEY ([Index]);
