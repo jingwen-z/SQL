@@ -176,10 +176,20 @@ SET [DBO-Contrôle 1er niveau-Date] = Format([DBO-Contrôle 1er niveau-Date], "d
 UPDATE MEJ
 SET [DBO-Contrôle 1er niveau-statu] = Left([DBO-Contrôle 1er niveau-statu], 2);
 
--- Create a column "Index"
+-- Create a column "N° concours & Bénéficiaire Final"
 ALTER TABLE MEJ
-ADD [Index] AUTOINCREMENT;
+ADD COLUMN [N° concours & Bénéficiaire Final] Text;
+
+-- Assign values in "N° concours & Bénéficiaire Final"
+UPDATE MEJ 
+SET [N° concours & Bénéficiaire Final] = [N° concours] & "_" & [Bénéficiaire Final];
+
+-- Update particular "N° concours & Bénéficiaire Final"
+UPDATE MEJ
+SET [N° concours & Bénéficiaire Final] = "CMG143502_RAVELONINDRINA Mamitiana_bis"
+WHERE [N° concours & Bénéficiaire Final] = "CMG143502_RAVELONINDRINA Mamitiana"
+  AND [Etape] = "avance";
 
 -- Determine a primary key
 ALTER TABLE MEJ
-ADD PRIMARY KEY ([Index]);
+ADD PRIMARY KEY ([N° concours & Bénéficiaire Final]);
