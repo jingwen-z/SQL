@@ -143,10 +143,19 @@ UPDATE Banques
 SET [Risque Pays] = "très élevé"
 WHERE [Risque Pays] = "très élévé";
 
--- Create a column "Index"
+-- Create a column "RESPONSABLE & ENTITE"
 ALTER TABLE Banques
-ADD [Index] AUTOINCREMENT;
+ADD COLUMN [RESPONSABLE & ENTITE] Text; 
+
+-- Assign values in "RESPONSABLE & ENTITE"
+UPDATE Banques 
+SET [RESPONSABLE & ENTITE] = [ENTITE RESPONSABLE COTATION (Pays si agence OU Siège)] & "_" & [ENTITE];
+
+-- Update particular "RESPONSABLE & ENTITE"
+UPDATE Banques SET [RESPONSABLE & ENTITE] = "OUGANDA_BOA Ouganda(MAJ)"
+WHERE [RESPONSABLE & ENTITE] = "OUGANDA_BOA Ouganda"
+  AND [GO/Remarque] = "AFR (MAJ)";
 
 -- Determine a primary key
 ALTER TABLE [Banques]
-ADD PRIMARY KEY ([Index]);
+ADD PRIMARY KEY ([RESPONSABLE & ENTITE ]);
