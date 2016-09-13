@@ -65,6 +65,10 @@ SET [Date transmission DPC au GO] = Trim([Date transmission DPC au GO]);
 UPDATE Banques
 SET [Date transmission DPC au GO] = Format([Date transmission DPC au GO],"dd/mm/yyyy");
 
+-- Correct "Date transmission DPC au GO"'s format
+ALTER TABLE Banques
+ALTER COLUMN [Date transmission DPC au GO] Date;
+
 
 -- Creation of a new column “Date d’Avis CPC”
 ALTER TABLE Banques
@@ -104,6 +108,10 @@ WHERE InStr([Date d'Avis CPC],  " ") <> 0;
 -- Transformation of the column “Date d'Avis CPC”’s format
 UPDATE Banques
 SET [Date d'Avis CPC] = Format([Date d'Avis CPC], "dd/mm/yyyy");
+
+-- Correct "Date d'Avis CPC"'s format
+ALTER TABLE Banques
+ALTER COLUMN [Date d'Avis CPC] Date;
  
 -- Removing the superfluous date in “Date dernière MAJ lab par GAR”
 UPDATE Banques
@@ -119,6 +127,10 @@ WHERE ENTITE = "BOA Niger";
 UPDATE Banques
 SET [Date dernière MAJ lab par GAR ] = Format([Date dernière MAJ lab par GAR ], "dd/mm/yyyy");
 
+-- Correct "Date dernière MAJ lab par GAR"'s format
+ALTER TABLE Banques
+ALTER COLUMN [Date dernière MAJ lab par GAR] Date;
+
 -- Movement of comment
 UPDATE Banques
 SET [Commentaires] = Mid([Actualisation Dossier LAB en cas de mise en jeu],InStr([Actualisation Dossier LAB en cas de mise en jeu],": ")+2)
@@ -132,8 +144,12 @@ WHERE [ENTITE]="ALIOS FINANCE GABON / SOGACA";
 -- Transformation of the column “Date transmission DPC”’s format 
 UPDATE Banques
 SET [Actualisation Dossier LAB en cas de mise en jeu] = Format([Actualisation Dossier LAB en cas de mise en jeu ], "dd/mm/yyyy");
+
+-- Correct "Actualisation Dossier LAB en cas de mise en jeu"'s format
+ALTER TABLE Banques
+ALTER COLUMN [Actualisation Dossier LAB en cas de mise en jeu] Date;
  
- -- Standardization of spelling in the field "Type Eligibilité"
+-- Standardization of spelling in the field "Type Eligibilité"
 UPDATE Banques
 SET [Type Eligibilité] = "Non Eligible"
 WHERE [Type Eligibilité] = "Non éligible";
