@@ -136,6 +136,22 @@ WHERE [Échéances en capital-Date 1ère échéance] = "OC"
    OR [Échéances en capital-Date 1ère échéance] = "pas TA reçu"
    OR [Échéances en capital-Date 1ère échéance] = "mail 11/02/10";
 
+-- Transformation of the column “TA transmis à DBO ”’s format
+UPDATE [Table Principale]
+SET [TA transmis à DBO ] = Format([TA transmis à DBO],"dd/mm/yyyy");
+
 -- Correct "TA transmis à DBO"'s format
 ALTER TABLE [Table Principale]
 ALTER COLUMN [TA transmis à DBO] Date;
+
+-- Correct "N°Tiers Bénéficiaire Primaire"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [N°Tiers Bénéficiaire Primaire] Numeric;
+
+-- Correct "Durée du prêt-En mois"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Durée du prêt-En mois] Numeric;
+
+-- Correct "Durée du prêt-Dont différé en mois"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Durée du prêt-Dont différé en mois] Numeric;
