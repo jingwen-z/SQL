@@ -135,3 +135,7 @@ WHERE [Échéances en capital-Date 1ère échéance] = "OC"
    OR [Échéances en capital-Date 1ère échéance] = "att nv TA"
    OR [Échéances en capital-Date 1ère échéance] = "pas TA reçu"
    OR [Échéances en capital-Date 1ère échéance] = "mail 11/02/10";
+
+-- Correct "TA transmis à DBO"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [TA transmis à DBO] Date;
