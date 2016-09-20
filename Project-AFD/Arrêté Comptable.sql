@@ -3,10 +3,6 @@ DELETE *
 FROM [Arrêté Comptable]
 WHERE [N° concours] IS NULL;
 
--- Remove column
-ALTER TABLE [Arrêté Comptable]
-DROP COLUMN [Commentaires DBO au 31/12/2015];
-
 -- Update repeated "N° concours"
 UPDATE [Arrêté Comptable] SET [N° concours] = [N° concours] & "-" & Right([Année d'octroi],2)
 WHERE [N° concours] = "CCM116901"
