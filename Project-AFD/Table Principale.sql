@@ -117,13 +117,41 @@ WHERE [Échéances en capital-Date 1ère échéance] = "OC"
    OR [Échéances en capital-Date 1ère échéance] = "pas TA reçu"
    OR [Échéances en capital-Date 1ère échéance] = "mail 11/02/10";
 
--- Transformation of the column “TA transmis à DBO ”’s format
+-- Transformation of the column “TA transmis à DBO”’s format
 UPDATE [Table Principale]
-SET [TA transmis à DBO ] = Format([TA transmis à DBO],"dd/mm/yyyy");
+SET [TA transmis à DBO] = Format([TA transmis à DBO],"dd/mm/yyyy");
 
 -- Correct "TA transmis à DBO"'s format
-ALTER TABLE [Table Principale]
-ALTER COLUMN [TA transmis à DBO] Date;
+--ALTER TABLE [Table Principale]
+--ALTER COLUMN [TA transmis à DBO] Date;
+
+-- Correction of "N° Béné Primaire"
+UPDATE [Table Principale] 
+SET [N°Tiers Bénéficiaire Primaire] = "6571"
+WHERE [Bénéficiaire Primaire] = "SGBC"
+  AND [N°Tiers Bénéficiaire Primaire] = "510934";
+  
+-- Update "Echéances en capital"_1
+UPDATE [Table Principale]
+SET [Échéances en capital-Date 1ère échéance] = "01/07/2010", [Échéances en capital-Date dernière échéance] = "01/06/2012"
+WHERE [Échéances en capital-Date 1ère échéance] = "juillet-10";
+
+-- Update "Echéances en capital"_2
+UPDATE [Table Principale]
+SET [Échéances en capital-Date 1ère échéance] = "01/01/2017", [Échéances en capital-Date dernière échéance] = "01/06/2027"
+WHERE [Échéances en capital-Date 1ère échéance] = "janv.-17";
+
+-- Purification of "Nb Emplois existants" & "Emplois existants+créés"
+UPDATE [Table Principale]
+SET [Nb Emplois existants] = "", [Emplois existants+créés] = ""
+WHERE [Nb Emplois existants] = "att info"
+   OR [Nb Emplois existants] = "en attente"
+   OR [Nb Emplois existants] = "NC";
+
+-- Purification of "dont femmes"
+UPDATE [Table Principale]
+SET [dont femmes] = ""
+WHERE [dont femmes] = "oui";
 
 -- Correct "N°Tiers Bénéficiaire Primaire"'s format
 ALTER TABLE [Table Principale]
@@ -137,7 +165,23 @@ ALTER COLUMN [Durée du prêt-En mois] Numeric;
 ALTER TABLE [Table Principale]
 ALTER COLUMN [Durée du prêt-Dont différé en mois] Numeric;
 
--- Correction of "N° Béné Primaire"
-UPDATE [Table Principale] SET [N°Tiers Bénéficiaire Primaire] = "6571"
-WHERE [Bénéficiaire Primaire] = "SGBC"
-  AND [N°Tiers Bénéficiaire Primaire] = "510934";
+-- Correct "Nb Emplois existants"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Nb Emplois existants] Numeric;
+
+-- Correct "Emplois existants+créés"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Emplois existants+créés] Numeric;
+
+-- Correct "dont femmes"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [dont femmes] Numeric;
+
+-- Transformation of the column “Taux commission”’s format
+UPDATE [Table Principale]
+SET [Taux commission] = Format([Taux commission],"Percent");
+
+-- Correct "Taux commission"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Taux commission] Numeric;
+
