@@ -122,8 +122,8 @@ UPDATE [Table Principale]
 SET [TA transmis à DBO] = Format([TA transmis à DBO],"dd/mm/yyyy");
 
 -- Correct "TA transmis à DBO"'s format
---ALTER TABLE [Table Principale]
---ALTER COLUMN [TA transmis à DBO] Date;
+ALTER TABLE [Table Principale]
+ALTER COLUMN [TA transmis à DBO] Date;
 
 -- Correction of "N° Béné Primaire"
 UPDATE [Table Principale] 
@@ -184,4 +184,5 @@ SET [Taux commission] = Format([Taux commission],"Percent");
 -- Correct "Taux commission"'s format
 ALTER TABLE [Table Principale]
 ALTER COLUMN [Taux commission] Numeric;
+
 
