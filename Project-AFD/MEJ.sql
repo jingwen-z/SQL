@@ -95,7 +95,7 @@ SET [Nombre d'années entre date de signature et demande d'avance] = DateDiff("y
 UPDATE MEJ
 SET [Nombre d'années entre date de signature et demande d'avance] = ""
 WHERE [Date de signature] IS NULL
-        OR [MEJ-Date de demande d'avance] IS NULL ;
+   OR [MEJ-Date de demande d'avance] IS NULL ;
 
 -- Update the column "Nombre de mois écoulé entre dossier complet et fin instruction"
 UPDATE MEJ
@@ -117,7 +117,7 @@ SET [MEJ-Délai respecté] =  IIf( DateDiff("yyyy",[EG-Date décheance du terme]
 UPDATE MEJ
 SET [MEJ-Délai respecté] = ""
 WHERE [EG-Date décheance du terme] IS NULL
-        OR [MEJ-Date de demande d'avance] IS NULL;
+   OR [MEJ-Date de demande d'avance] IS NULL;
 
 -- Update the column "Nombre de jours entre demande paiement GAR et paiement DBO"
 UPDATE MEJ
@@ -130,14 +130,6 @@ SET [Avance-Date de paiement (accord GAR à DBO)] = Format([Avance-Date de paiem
 -- Standardization of "Avance-Date de paiement DBO (swift)"'s format
 UPDATE MEJ
 SET [Avance-Date de paiement DBO (swift)] = Format([Avance-Date de paiement DBO (swift)], "dd/mm/yyyy");
-
--- Standardization of "Solde-Date de paiement (accord GAR à DBO)"'s format
-UPDATE MEJ
-SET [Solde-Date de paiement (accord GAR à DBO)] = Format([Solde-Date de paiement (accord GAR à DBO)], "dd/mm/yyyy");
-
--- Standardization of "Solde-Date de paiement DBO (swift)"'s format
-UPDATE MEJ
-SET [Solde-Date de paiement DBO (swift)] = Format([Solde-Date de paiement DBO (swift)], "dd/mm/yyyy");
 
 -- Update the column "DBO-Ecart GAR – DBO"
 UPDATE MEJ
@@ -193,3 +185,55 @@ WHERE [N° concours & Bénéficiaire Final] = "CMG143502_RAVELONINDRINA Mamitian
 -- Determine a primary key
 ALTER TABLE MEJ
 ADD PRIMARY KEY ([N° concours & Bénéficiaire Final]);
+
+-- Update particular value in "Impayés-Date du 1er impayé survenu"
+UPDATE MEJ
+SET [Impayés-Date du 1er impayé survenu] = ""
+WHERE [Impayés-Date du 1er impayé survenu] = "?";
+
+-- Standardization of "Impayés-Date du 1er impayé survenu"'s format
+UPDATE MEJ
+SET [Impayés-Date du 1er impayé survenu] = Format([Impayés-Date du 1er impayé survenu], "dd/mm/yyyy");
+
+-- Correct "Impayés-Date du 1er impayé survenu"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [Impayés-Date du 1er impayé survenu] Date;
+
+-- Purification of "Solde-Date de paiement DBO (swift)"_1
+UPDATE MEJ
+SET [Solde-Date de paiement DBO (swift)] = "",  [Commentaires] = [Commentaires] & "DBO a refusé de payer le solde."
+WHERE [Solde-Date de paiement DBO (swift)] = "En attente";
+
+-- Purification of "Solde-Date de paiement DBO (swift)"_2
+UPDATE MEJ
+SET [Solde-Date de paiement (accord GAR à DBO)] = "22/04/2016", 
+    [Solde-Date de paiement DBO (swift)] = "22/04/2016", 
+    [Commentaires] = [Commentaires] & " Le solde est payé par l'agence."
+WHERE [Solde-Date de paiement (accord GAR à DBO)] = "22/04/2016 payé par l'agene"
+  AND [Solde-Date de paiement DBO (swift)] = "22/04/2016 payé par l'agene";
+
+-- Standardization of "Solde-Date de paiement (accord GAR à DBO)"'s format
+UPDATE MEJ
+SET [Solde-Date de paiement (accord GAR à DBO)] = Format([Solde-Date de paiement (accord GAR à DBO)], "dd/mm/yyyy");
+
+-- Correct "Solde-Date de paiement (accord GAR à DBO)"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [Solde-Date de paiement (accord GAR à DBO)] Date;
+
+-- Standardization of "Solde-Date de paiement DBO (swift)"'s format
+UPDATE MEJ
+SET [Solde-Date de paiement DBO (swift)] = Format([Solde-Date de paiement DBO (swift)], "dd/mm/yyyy");
+
+-- Correct "Solde-Date de paiement DBO (swift)"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [Solde-Date de paiement DBO (swift)] Date;
+
+
+
+
+
+
+
+
+
+
