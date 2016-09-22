@@ -14,3 +14,7 @@ ADD PRIMARY KEY ([N° concours]);
 SELECT *
 FROM GI
 ORDER BY [Date d'octroi] DESC;
+
+-- Correct "N°Tiers Bénéficiaire Primaire"'s format
+ALTER TABLE GI
+ALTER COLUMN [N°Tiers Bénéficiaire Primaire] Numeric;
