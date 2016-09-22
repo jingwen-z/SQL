@@ -18,3 +18,11 @@ ORDER BY [Date d'octroi] DESC;
 -- Correct "N°Tiers Bénéficiaire Primaire"'s format
 ALTER TABLE GI
 ALTER COLUMN [N°Tiers Bénéficiaire Primaire] Numeric;
+
+-- Standardization of the column “Taux de provision”’s format
+UPDATE GI
+SET [Taux de provision] = Format([Taux de provision],"Percent");
+
+-- Correct "Taux de provision"'s format
+ALTER TABLE GI
+ALTER COLUMN [Taux de provision] Numeric;
