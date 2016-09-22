@@ -123,14 +123,6 @@ WHERE [EG-Date décheance du terme] IS NULL
 UPDATE MEJ
 SET [Nombre de jours entre demande paiement GAR et paiement DBO] = DateDiff("d",[Avance-Date de paiement (accord GAR à DBO)],[Avance-Date de paiement DBO (swift)]);
 
--- Standardization of "Avance-Date de paiement (accord GAR à DBO)"'s format
-UPDATE MEJ
-SET [Avance-Date de paiement (accord GAR à DBO)] = Format([Avance-Date de paiement (accord GAR à DBO)], "dd/mm/yyyy");
-
--- Standardization of "Avance-Date de paiement DBO (swift)"'s format
-UPDATE MEJ
-SET [Avance-Date de paiement DBO (swift)] = Format([Avance-Date de paiement DBO (swift)], "dd/mm/yyyy");
-
 -- Update the column "DBO-Ecart GAR – DBO"
 UPDATE MEJ
 SET [DBO-Ecart GAR - DBO] = [Avance-Montant de l'avance en €] - [DBO-Montant de l'avance comptabilisée en €];
@@ -228,12 +220,30 @@ SET [Solde-Date de paiement DBO (swift)] = Format([Solde-Date de paiement DBO (s
 ALTER TABLE MEJ
 ALTER COLUMN [Solde-Date de paiement DBO (swift)] Date;
 
+-- Standardization of the column “% garanti”’s format
+UPDATE MEJ
+SET [% garanti] = Format([% garanti],"Percent");
 
+-- Correct "% garanti"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [% garanti] Numeric;
 
+-- Correct "N°Tiers Bénéficiaire Primaire"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [N°Tiers Bénéficiaire Primaire] Numeric;
 
+-- Standardization of "Avance-Date de paiement (accord GAR à DBO)"'s format
+UPDATE MEJ
+SET [Avance-Date de paiement (accord GAR à DBO)] = Format([Avance-Date de paiement (accord GAR à DBO)], "dd/mm/yyyy");
 
+-- Correct "Avance-Date de paiement (accord GAR à DBO)"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [Avance-Date de paiement (accord GAR à DBO)] Date;
 
+-- Standardization of "Avance-Date de paiement DBO (swift)"'s format
+UPDATE MEJ
+SET [Avance-Date de paiement DBO (swift)] = Format([Avance-Date de paiement DBO (swift)], "dd/mm/yyyy");
 
-
-
-
+-- Correct "Avance-Date de paiement DBO (swift)"'s format
+ALTER TABLE MEJ
+ALTER COLUMN [Avance-Date de paiement DBO (swift)] Date;
