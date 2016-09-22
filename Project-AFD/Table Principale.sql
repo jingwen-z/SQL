@@ -185,4 +185,18 @@ SET [Taux commission] = Format([Taux commission],"Percent");
 ALTER TABLE [Table Principale]
 ALTER COLUMN [Taux commission] Numeric;
 
+-- Transformation of the column “Échéances en capital-Date 1ère échéance”’s format
+UPDATE [Table Principale]
+SET [Échéances en capital-Date 1ère échéance] = Format([Échéances en capital-Date 1ère échéance],"dd/mm/yyyy");
 
+-- Correct "Échéances en capital-Date 1ère échéance"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Échéances en capital-Date 1ère échéance] Date;
+
+-- Transformation of the column “Échéances en capital-Date dernière échéance”’s format
+UPDATE [Table Principale]
+SET [Échéances en capital-Date dernière échéance] = Format([Échéances en capital-Date dernière échéance],"dd/mm/yyyy");
+
+-- Correct "Échéances en capital-Date 1ère échéance"'s format
+ALTER TABLE [Table Principale]
+ALTER COLUMN [Échéances en capital-Date dernière échéance] Date;
