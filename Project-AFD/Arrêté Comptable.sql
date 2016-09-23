@@ -134,3 +134,36 @@ WHERE [Échéances en capital-Date 1ère échéance] = "OC"
    OR [Échéances en capital-Date 1ère échéance] = "att nv TA"
    OR [Échéances en capital-Date 1ère échéance] = "pas TA reçu"
    OR [Échéances en capital-Date 1ère échéance] = "mail 11/02/10";
+
+-- Transformation of the column “TA transmis à DBO”’s format
+UPDATE [Arrêté Comptable]
+SET [TA transmis à DBO] = Format([TA transmis à DBO],"dd/mm/yyyy");
+
+-- Correct "TA transmis à DBO"'s format
+ALTER TABLE [Arrêté Comptable]
+ALTER COLUMN [TA transmis à DBO] Date;
+
+-- Correct "N°Tiers Bénéficiaire Primaire"'s format
+ALTER TABLE [Arrêté Comptable]
+ALTER COLUMN [N°Tiers Bénéficiaire Primaire] Numeric;
+
+-- Correct "Durée du prêt-En mois"'s format
+ALTER TABLE [Arrêté Comptable]
+ALTER COLUMN [Durée du prêt-En mois] Numeric;
+
+-- Transformation of the column “Taux commission”’s format
+UPDATE [Arrêté Comptable]
+SET [Taux commission] = Format([Taux commission],"Percent");
+
+-- Correct "Taux commission"'s format
+ALTER TABLE [Arrêté Comptable]
+ALTER COLUMN [Taux commission] Numeric;
+
+-- Transformation of the column “Échéances en capital-Date 1ère échéance”’s format
+UPDATE [Arrêté Comptable]
+SET [Échéances en capital-Date 1ère échéance] = Format([Échéances en capital-Date 1ère échéance],"dd/mm/yyyy");
+
+-- Correct "Échéances en capital-Date 1ère échéance"'s format
+ALTER TABLE [Arrêté Comptable]
+ALTER COLUMN [Échéances en capital-Date 1ère échéance] Date;
+
