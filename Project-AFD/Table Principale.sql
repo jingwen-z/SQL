@@ -203,5 +203,5 @@ ALTER COLUMN [Échéances en capital-Date dernière échéance] Date;
 
 -- Update a value of "Observations"
 UPDATE [Table Principale]
-SET [Observations ou modalités commission GPP après signature] = " ATTENTION: Première transmissoin de TA à DBO est 30/04/2013."
+SET [Observations ou modalités commission GPP après signature] = [Observations ou modalités commission GPP après signature] & " ATTENTION: Première transmissoin de TA à DBO est 30/04/2013."
 WHERE [N° concours] = "CMG143701";
