@@ -177,14 +177,6 @@ ALTER COLUMN [Emplois existants+créés] Numeric;
 ALTER TABLE [Table Principale]
 ALTER COLUMN [dont femmes] Numeric;
 
--- Transformation of the column “Taux commission”’s format
-UPDATE [Table Principale]
-SET [Taux commission] = Format([Taux commission],"Percent");
-
--- Correct "Taux commission"'s format
-ALTER TABLE [Table Principale]
-ALTER COLUMN [Taux commission] Numeric;
-
 -- Transformation of the column “Échéances en capital-Date 1ère échéance”’s format
 UPDATE [Table Principale]
 SET [Échéances en capital-Date 1ère échéance] = Format([Échéances en capital-Date 1ère échéance],"dd/mm/yyyy");
