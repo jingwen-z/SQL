@@ -151,14 +151,6 @@ ALTER COLUMN [N°Tiers Bénéficiaire Primaire] Numeric;
 ALTER TABLE [Arrêté Comptable]
 ALTER COLUMN [Durée du prêt-En mois] Numeric;
 
--- Transformation of the column “Taux commission”’s format
-UPDATE [Arrêté Comptable]
-SET [Taux commission] = Format([Taux commission],"Percent");
-
--- Correct "Taux commission"'s format
-ALTER TABLE [Arrêté Comptable]
-ALTER COLUMN [Taux commission] Numeric;
-
 -- Transformation of the column “Échéances en capital-Date 1ère échéance”’s format
 UPDATE [Arrêté Comptable]
 SET [Échéances en capital-Date 1ère échéance] = Format([Échéances en capital-Date 1ère échéance],"dd/mm/yyyy");
