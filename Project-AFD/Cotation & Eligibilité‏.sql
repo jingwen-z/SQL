@@ -1,7 +1,3 @@
--- Remove columns 
-ALTER TABLE Banques
-DROP COLUMN Champ20, Champ21, Champ22, Champ23, Champ24, Champ25, Champ26, Champ27, Champ28, Champ29, Champ30, Champ31, Champ32, Champ33;
-
 -- Remove empty rows
 DELETE *
 FROM Banques
@@ -18,6 +14,11 @@ ADD COLUMN [GO/Remarque] Text;
 
  
 -- the field “Date transmission DPC au GO”
+-- Standardization of a value in the field "Date transmission DPC au GO"
+UPDATE Banques 
+SET [Date transmission DPC au GO] = "Dématérialisé 25/08/2016"
+WHERE [Date transmission DPC au GO] = "25/08/2016 Dématérialisé";
+
 -- Separation of the column “Date transmission DPC au GO”
 UPDATE Banques
 SET [GO/Remarque] = Left([Date transmission DPC au GO],(Instr([Date transmission DPC au GO]," ")-1)), 
@@ -27,6 +28,7 @@ SET [GO/Remarque] = Left([Date transmission DPC au GO],(Instr([Date transmission
 UPDATE Banques
 SET [GO/Remarque] = [GO/Remarque] & " " & [Date transmission DPC au GO]
 WHERE ENTITE = "STANDARD BANK SOUTH AFRICA"
+       OR ENTITE = "FTB"
        OR ENTITE = "MUCODEC"
        OR ENTITE = "BNDA"
        OR ENTITE = "MCB Ltd"
@@ -36,6 +38,7 @@ WHERE ENTITE = "STANDARD BANK SOUTH AFRICA"
 UPDATE Banques
 SET [Date transmission DPC au GO] = " "
 WHERE ENTITE = "STANDARD BANK SOUTH AFRICA"
+       OR ENTITE = "FTB"
        OR ENTITE = "MUCODEC"
        OR ENTITE = "BNDA"
        OR ENTITE = "MCB Ltd"
