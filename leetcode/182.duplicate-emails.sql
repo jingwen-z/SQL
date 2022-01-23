@@ -17,7 +17,18 @@
 --| a@b.com |
 --+---------+
 
+-- Method 1 (749 ms)
 SELECT Email
 FROM Person
 GROUP BY Email
 HAVING COUNT(Email) > 1
+
+-- Method 2 (489 ms)
+SELECT Email
+FROM (
+    SELECT
+        Email
+        , COUNT(DISTINCT Id) AS nb
+    FROM Person
+    GROUP BY Email) AS emailCount
+WHERE nb > 1
